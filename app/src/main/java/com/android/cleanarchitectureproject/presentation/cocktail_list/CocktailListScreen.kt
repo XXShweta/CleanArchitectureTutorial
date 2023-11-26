@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.android.cleanarchitectureproject.common.Resource
 import com.android.cleanarchitectureproject.navigation.Screen
 import com.android.cleanarchitectureproject.presentation.cocktail_list.components.CocktailListItem
 
@@ -29,29 +30,35 @@ fun CocktailList(
 ){
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.cocktails) { cocktail ->
-                CocktailListItem(
-                    cocktail = cocktail,
-                    onItemClick = {
-                        navController.navigate(Screen.CocktailDetailScreen.route + "/${cocktail.id}")
-                    }
+        when(state){
+            is Resource.Error -> {
+                Text(
+                    text = state.message?: "Unexpected Error",
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .align(Alignment.Center)
                 )
             }
-        }
-        if(state.error.isNotBlank()) {
-            Text(
-                text = state.error,
-                color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .align(Alignment.Center)
-            )
-        }
-        if(state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            is Resource.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
+            is Resource.Success -> {
+                state.data?.let {cocktails ->
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(cocktails) { cocktail ->
+                            CocktailListItem(
+                                cocktail = cocktail,
+                                onItemClick = {
+                                    navController.navigate(Screen.CocktailDetailScreen.route + "/${cocktail.id}")
+                                }
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 

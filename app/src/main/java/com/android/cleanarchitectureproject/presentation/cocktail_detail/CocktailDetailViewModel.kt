@@ -9,10 +9,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.cleanarchitectureproject.common.Constants
 import com.android.cleanarchitectureproject.common.Resource
+import com.android.cleanarchitectureproject.domain.model.Cocktail
 import com.android.cleanarchitectureproject.domain.use_case.get_cocktails.GetCocktailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
@@ -22,8 +26,8 @@ class CocktailDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel(){
 
-    private val _state = mutableStateOf(CocktailDetailState())
-    val state: State<CocktailDetailState> = _state
+    private val _state = mutableStateOf<Resource<Cocktail>>(Resource.Loading())
+    val state: State<Resource<Cocktail>> = _state
 
     init {
         savedStateHandle.get<String>(Constants.PARAM_COCKTAIL_ID)?.let { id ->
@@ -32,21 +36,11 @@ class CocktailDetailViewModel @Inject constructor(
     }
 
     private fun getCocktail(id: String){
-        getCocktailUseCase(id).onEach {
-            when(it){
-                is Resource.Error -> {
-                    _state.value = CocktailDetailState(
-                        error = it.message ?: "An unexpected error occured"
-                    )
-                }
-                is Resource.Loading -> {
-                    _state.value = CocktailDetailState(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _state.value = CocktailDetailState(cocktail = it.data)
-                }
+        viewModelScope.launch {
+            getCocktailUseCase(id).collect{ result ->
+                _state.value = result
             }
-        }.launchIn(viewModelScope)
+        }
     }
 
 
