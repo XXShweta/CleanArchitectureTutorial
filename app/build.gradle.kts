@@ -95,5 +95,7 @@ dependencies {
 
     // Retrofit2
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.github.skydoves:landscapist-glide:2.2.12")
+
 
 }

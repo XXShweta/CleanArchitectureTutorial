@@ -1,8 +1,7 @@
 package com.android.cleanarchitectureproject.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -15,9 +14,8 @@ import com.android.cleanarchitectureproject.presentation.cocktail_detail.Cocktai
 import com.android.cleanarchitectureproject.presentation.cocktail_list.CocktailListViewModel
 
 
-@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @Composable
-fun Navigation(navController: NavHostController){
+fun Navigation(navController: NavHostController, modifier: Modifier){
     NavHost(
         navController = navController,
         startDestination = Screen.CocktailListScreen.route
@@ -27,7 +25,8 @@ fun Navigation(navController: NavHostController){
         ) {
             val viewModel: CocktailListViewModel = hiltViewModel()
             CocktailList(
-                viewModel.state.value
+                viewModel.state.value,
+                modifier
             ){
                 navController.navigateToDetail(it)
             }
@@ -37,7 +36,8 @@ fun Navigation(navController: NavHostController){
         ) {
             val viewModel: CocktailDetailViewModel = hiltViewModel()
             CocktailDetailScreen(
-                viewModel.state.value
+                viewModel.state.value,
+                modifier
             )
         }
     }

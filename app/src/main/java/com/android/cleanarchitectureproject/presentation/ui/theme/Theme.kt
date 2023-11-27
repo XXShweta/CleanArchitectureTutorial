@@ -16,25 +16,27 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    background = Black,
+    surface = White,
+    primary = LightGrey,
+    secondary = White,
+    tertiary = DarkGrey,
+    onPrimary = Nero,
+    onSecondary = Whisper,
+    onTertiary = DarkRed,
+    onBackground = Overlay
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = Black,
+    surface = White,
+    primary = DarkGrey,
+    secondary = MedGrey,
+    tertiary = LightGrey,
+    onPrimary = GainsBoro,
+    onSecondary = Whisper,
+    onTertiary = DarkRed,
+    onBackground = Overlay
 )
 
 @Composable
@@ -57,7 +59,8 @@ fun CleanArchitectureProjectTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colorScheme.background.toArgb()
+            window.navigationBarColor = colorScheme.background.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
