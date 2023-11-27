@@ -1,7 +1,7 @@
 package com.android.cleanarchitectureproject.di
 
 import com.android.cleanarchitectureproject.common.Constants.BASE_URL
-import com.android.cleanarchitectureproject.data.remote.TheCocktailDbApi
+import com.android.cleanarchitectureproject.data.remote.api.TheCocktailDbApi
 import com.android.cleanarchitectureproject.data.repository.CocktailRepositoryImpl
 import com.android.cleanarchitectureproject.domain.repository.CocktailRepository
 import dagger.Module
@@ -18,12 +18,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesTheCocktailDbApi(): TheCocktailDbApi {
+    fun providesRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(TheCocktailDbApi::class.java)
+
+    }
+
+    @Provides
+    @Singleton
+    fun providesTheCocktailDbApi(retrofit: Retrofit): TheCocktailDbApi {
+        return retrofit.create(TheCocktailDbApi::class.java)
     }
 
     @Provides

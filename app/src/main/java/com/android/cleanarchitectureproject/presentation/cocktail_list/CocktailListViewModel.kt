@@ -31,11 +31,12 @@ class CocktailListViewModel @Inject constructor(
     }
 
     private fun getCocktails(){
-        getCocktailsUseCase()
-            .onEach { result ->
-            _state.value = result
+        viewModelScope.launch {
+            getCocktailsUseCase().collect{ result ->
+                _state.value = result
             }
-            .launchIn(viewModelScope)
+        }
+
     }
 
 }
