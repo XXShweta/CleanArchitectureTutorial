@@ -13,6 +13,7 @@ import com.android.cleanarchitectureproject.common.ProcessAPI
 import com.android.cleanarchitectureproject.common.Resource
 import com.android.cleanarchitectureproject.domain.model.Cocktail
 import com.android.cleanarchitectureproject.presentation.cocktail_list.components.CocktailListItem
+import com.android.cleanarchitectureproject.presentation.ui.theme.AppDimensionsTheme
 
 @Composable
 fun CocktailList(
@@ -25,8 +26,8 @@ fun CocktailList(
             state.data?.let {cocktails ->
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(space = 24.dp),
-                    contentPadding = PaddingValues(all = 22.dp)
+                    verticalArrangement = Arrangement.spacedBy(space = AppDimensionsTheme.dimensions.twentyFourDp),
+                    contentPadding = PaddingValues(all = AppDimensionsTheme.dimensions.twentyTwoDp)
                 ) {
                     items(cocktails) { cocktail ->
                         CocktailListItem(

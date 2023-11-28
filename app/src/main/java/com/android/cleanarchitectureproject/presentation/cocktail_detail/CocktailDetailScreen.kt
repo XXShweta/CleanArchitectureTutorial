@@ -17,6 +17,7 @@ import com.android.cleanarchitectureproject.common.Resource
 import com.android.cleanarchitectureproject.common.component.ImageViewComposable
 import com.android.cleanarchitectureproject.domain.model.Cocktail
 import com.android.cleanarchitectureproject.presentation.cocktail_detail.components.CocktailDescription
+import com.android.cleanarchitectureproject.presentation.ui.theme.AppDimensionsTheme
 
 
 @Composable
@@ -26,26 +27,26 @@ fun CocktailDetailScreen(
 ) {
     ProcessAPI(state) {
         Box(
-            modifier = modifier.fillMaxSize().padding(start = 20.dp, end = 20.dp),
+            modifier = modifier.fillMaxSize().padding(start = AppDimensionsTheme.dimensions.twentyDp, end = AppDimensionsTheme.dimensions.twentyDp),
             contentAlignment = Alignment.Center
         ) {
             state.data?.let { cocktail ->
                 Card(
-                    shape = RoundedCornerShape(size = 12.dp)
+                    shape = RoundedCornerShape(size = AppDimensionsTheme.dimensions.twelveDp)
                 ) {
                     LazyColumn(
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(vertical = 10.dp, horizontal = 12.dp),
+                            .padding(vertical = AppDimensionsTheme.dimensions.tenDp, horizontal = AppDimensionsTheme.dimensions.twentyDp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         item {
                             ImageViewComposable(
                                 imageUrl = cocktail.url,
                                 modifier = Modifier
-                                    .size(300.dp)
+                                    .size(AppDimensionsTheme.dimensions.twoNinetyDp)
                                     .clip(CircleShape)
-                                    .border(1.dp, MaterialTheme.colorScheme.surface, CircleShape)
+                                    .border(AppDimensionsTheme.dimensions.oneDp, MaterialTheme.colorScheme.surface, CircleShape)
                             )
                         }
                         item {

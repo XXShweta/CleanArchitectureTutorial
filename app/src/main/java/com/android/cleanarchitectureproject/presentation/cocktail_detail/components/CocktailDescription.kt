@@ -11,14 +11,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.android.cleanarchitectureproject.presentation.ui.theme.AppDimensionsTheme
 
 
 @Composable
 fun CocktailDescription (text: String){
-    Spacer(modifier = Modifier.height(12.dp))
+    Spacer(modifier = Modifier.height(AppDimensionsTheme.dimensions.twelveDp))
     Text(
         text = text,
-        fontSize = 16.sp,
+        fontSize = AppDimensionsTheme.dimensions.sixteenSp,
         color = MaterialTheme.colorScheme.secondary,
         overflow = TextOverflow.Ellipsis,
         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold, fontStyle = FontStyle.Italic)

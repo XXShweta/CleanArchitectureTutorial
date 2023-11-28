@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.android.cleanarchitectureproject.navigation.Navigation
+import com.android.cleanarchitectureproject.presentation.ui.theme.AppDimensionsTheme
 import com.android.cleanarchitectureproject.presentation.ui.theme.CleanArchitectureProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         topBar = {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxWidth().padding(all = 10.dp)
+                                    .fillMaxWidth().padding(all = AppDimensionsTheme.dimensions.tenDp)
                                     .wrapContentHeight(),
                                 contentAlignment = Alignment.Center
                             ) {

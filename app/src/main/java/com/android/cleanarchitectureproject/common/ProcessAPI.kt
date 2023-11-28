@@ -1,6 +1,7 @@
 package com.android.cleanarchitectureproject.common
 
 import androidx.compose.runtime.Composable
+import com.android.cleanarchitectureproject.common.Constants.UNEXPECTED_ERROR
 import com.android.cleanarchitectureproject.common.component.ErrorComposable
 import com.android.cleanarchitectureproject.common.component.LoadingComposable
 
@@ -11,7 +12,7 @@ fun<T> ProcessAPI(
 ){
     when(state){
         is Resource.Error -> {
-            ErrorComposable(state.message ?: "Unexpected Error")
+            ErrorComposable(state.message ?: UNEXPECTED_ERROR)
         }
         is Resource.Loading -> {
             LoadingComposable()

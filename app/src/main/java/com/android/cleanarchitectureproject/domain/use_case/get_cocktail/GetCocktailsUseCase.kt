@@ -1,5 +1,6 @@
 package com.android.cleanarchitectureproject.domain.use_case.get_cocktail
 
+import com.android.cleanarchitectureproject.common.Constants.EMPTY_RESPONSE
 import com.android.cleanarchitectureproject.common.Resource
 import com.android.cleanarchitectureproject.domain.model.Cocktail
 import com.android.cleanarchitectureproject.domain.repository.CocktailRepository
@@ -16,7 +17,11 @@ class GetCocktailsUseCase @Inject constructor(
                 when(result){
                     is Resource.Success -> {
                         val list = result.data?.sortedBy { it.name }?.filter { it.name.length > 2 }
-                        emit(Resource.Success(list?: emptyList()))
+                        list?.let {list ->
+                            emit(Resource.Success(list))
+                        }?: kotlin.run {
+                            emit(Resource.Error(EMPTY_RESPONSE))
+                        }
                     }
                     else -> {
                         emit(result)

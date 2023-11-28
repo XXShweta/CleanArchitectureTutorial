@@ -21,9 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.android.cleanarchitectureproject.common.component.ImageViewComposable
+import com.android.cleanarchitectureproject.presentation.ui.theme.AppDimensionsTheme
 
 @Composable
 fun CocktailListItem(
@@ -31,26 +30,26 @@ fun CocktailListItem(
     onItemClick: (Cocktail) -> Unit
 ){
     Card(
-        shape = RoundedCornerShape(size = 12.dp)
+        shape = RoundedCornerShape(size = AppDimensionsTheme.dimensions.twelveDp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { onItemClick(cocktail) }
-                .padding(vertical = 10.dp, horizontal = 12.dp),
+                .padding(vertical = AppDimensionsTheme.dimensions.tenDp, horizontal = AppDimensionsTheme.dimensions.twelveDp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             ImageViewComposable(
                 imageUrl = cocktail.url,
                 modifier = Modifier
-                    .size(36.dp)
+                    .size(AppDimensionsTheme.dimensions.twentyFourDp)
                     .clip(CircleShape)
-                    .border(1.dp, MaterialTheme.colorScheme.surface, CircleShape)
+                    .border(AppDimensionsTheme.dimensions.oneDp, MaterialTheme.colorScheme.surface, CircleShape)
             )
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(AppDimensionsTheme.dimensions.twelveDp))
             Text(
                 text = cocktail.name,
-                fontSize = 16.sp,
+                fontSize = AppDimensionsTheme.dimensions.sixteenSp,
                 color = MaterialTheme.colorScheme.secondary,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold, fontStyle = FontStyle.Italic)
