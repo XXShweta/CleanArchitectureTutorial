@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CleanArchitectureProject</string>
+    <string name="image_error">image request failed</string>
 </resources>

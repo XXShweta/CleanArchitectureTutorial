@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import com.android.cleanarchitectureproject.R
+import com.android.cleanarchitectureproject.common.Constants.IMAGE_ERROR
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.ImageOptions
@@ -28,7 +31,6 @@ fun ImageViewComposable(
         ),
         requestOptions = {
             RequestOptions()
-                .override(256,256)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
         },
@@ -40,7 +42,7 @@ fun ImageViewComposable(
             }
         },
         failure = {
-            Text(text = "image request failed.")
+            Text(text = stringResource(id = R.string.image_error))
         }
     )
 }
