@@ -31,7 +31,7 @@ fun ImageViewComposable(
         ),
         requestOptions = {
             RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .centerCrop()
         },
         loading = {
