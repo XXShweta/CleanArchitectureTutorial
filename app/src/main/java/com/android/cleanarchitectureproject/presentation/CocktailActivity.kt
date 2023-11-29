@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                                 Text(
                                     text = "Cocktail",
                                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.surface
+                                    color = MaterialTheme.colorScheme.secondary
                                 )
                             }
                         }
