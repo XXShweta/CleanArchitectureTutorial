@@ -1,4 +1,4 @@
-package com.android.cleanarchitectureproject.domain.use_case.get_cocktails
+package com.android.cleanarchitectureproject.domain.use_case.get_cocktail_by_id
 
 import com.android.cleanarchitectureproject.common.Resource
 import com.android.cleanarchitectureproject.domain.model.Cocktail

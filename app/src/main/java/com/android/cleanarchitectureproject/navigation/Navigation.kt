@@ -1,6 +1,7 @@
 package com.android.cleanarchitectureproject.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -25,7 +26,7 @@ fun Navigation(navController: NavHostController, modifier: Modifier){
         ) {
             val viewModel: CocktailListViewModel = hiltViewModel()
             CocktailList(
-                viewModel.state.value,
+                viewModel.state.collectAsState().value,
                 modifier
             ){
                 navController.navigateToDetail(it)
@@ -36,7 +37,7 @@ fun Navigation(navController: NavHostController, modifier: Modifier){
         ) {
             val viewModel: CocktailDetailViewModel = hiltViewModel()
             CocktailDetailScreen(
-                viewModel.state.value,
+                viewModel.state.collectAsState().value,
                 modifier
             )
         }
