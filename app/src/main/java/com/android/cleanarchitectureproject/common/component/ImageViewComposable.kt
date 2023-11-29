@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import com.android.cleanarchitectureproject.R
+import com.android.cleanarchitectureproject.common.Constants.IMAGE_ERROR
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.ImageOptions
@@ -30,7 +31,7 @@ fun ImageViewComposable(
         ),
         requestOptions = {
             RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
         },
         loading = {
